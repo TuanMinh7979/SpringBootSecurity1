@@ -1,19 +1,13 @@
 package com.boot.security.securityconf;
 
-import static com.boot.security.securityconf.AppUserPermission.COURSE_READ;
-import static com.boot.security.securityconf.AppUserPermission.COURSE_WRITE;
-import static com.boot.security.securityconf.AppUserPermission.STUDENT_READ;
-import static com.boot.security.securityconf.AppUserPermission.STUDENT_WRITE;
-
-import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 import com.google.common.collect.Sets;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.util.SystemPropertyUtils;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static com.boot.security.securityconf.AppUserPermission.*;
 
 public enum AppRole {
     STUDENT(Sets.newHashSet()),
@@ -37,10 +31,10 @@ public enum AppRole {
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
                 .collect(Collectors.toSet());
         permissions.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
-        System.out.println("---TEST");
-        for (GrantedAuthority g : permissions) {
-            System.out.println(g.toString());
-        }
+//        System.out.println("---TEST");
+//        for (GrantedAuthority g : permissions) {
+//            System.out.println(g.toString());
+//        }
         return permissions;
     }
 
